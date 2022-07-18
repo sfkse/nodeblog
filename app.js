@@ -1,3 +1,4 @@
+const exphbs = require('express-handlebars')
 const path = require('path')
 const express = require('express')
 const app = express()
@@ -6,9 +7,27 @@ const hostname = '127.0.0.1'
 
 
 app.use(express.static('public'))
+
+app.engine('handlebars', exphbs.engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'site/index.html'))
+    res.render('site2/index');
 })
+
+app.get('/about', (req, res) => {
+    res.render('site2/about');
+})
+
+app.get('/blog', (req, res) => {
+    res.render('site2/blog');
+})
+
+app.get('/contact', (req, res) => {
+    res.render('site2/contact');
+})
+
 app.listen(port, hostname, () => {
   console.log(`Server calisiyor, http://${hostname}:${port}/`)
 })
