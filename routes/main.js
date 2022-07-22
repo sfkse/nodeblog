@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Post = require('../models/Post')
 
 router.get('/', (req, res) => {
     res.render('site2/index');
@@ -10,7 +11,10 @@ router.get('/about', (req, res) => {
 })
 
 router.get('/blog', (req, res) => {
-    res.render('site2/blog');
+    Post.find({}).then(posts => {
+        console.log(posts);
+        res.render('site2/blog', {posts: posts.map(post => post.toJSON())});
+    })
 })
 
 router.get('/contact', (req, res) => {
@@ -25,11 +29,5 @@ router.get('/register', (req, res) => {
     res.render('site2/register');
 })
 
-router.get('/posts/new', (req, res) => {
-    res.render('site2/addpost');
-})
 
-router.post('/posts/test', (req, res) => {
-    res.redirect('/');
-})
 module.exports = router;
