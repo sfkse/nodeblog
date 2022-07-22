@@ -3,7 +3,8 @@ const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const fileUpload = require('express-fileupload')
+const fileUpload = require('express-fileupload');
+const generateDate = require('./helpers/generateDate').generateDate;
 const app = express();
 const port = 3000;
 const hostname = '127.0.0.1';
@@ -15,7 +16,8 @@ app.use(express.static('public'));
 
 app.use(fileUpload());
 
-app.engine('handlebars', exphbs.engine());
+
+app.engine('handlebars', exphbs.engine({helpers: {generateDate: generateDate}}));
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
@@ -27,6 +29,7 @@ app.use(bodyParser.json())
 
 const main = require('./routes/main');
 const posts = require('./routes/posts');
+
 app.use('/', main);
 app.use('/posts', posts);
 
