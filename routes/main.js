@@ -29,7 +29,4 @@ router.get('/posts/new', (req, res) => {
     res.render('site2/addpost');
 })
 
-router.post('/posts/test', (req, res) => {
-    res.redirect('/');
-})
 module.exports = router;
