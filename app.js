@@ -1,14 +1,44 @@
+const exphbs = require('express-handlebars')
 const path = require('path')
 const express = require('express')
+const mongoose = require('mongoose');
 const app = express()
 const port = 3000
 const hostname = '127.0.0.1'
 
 
 app.use(express.static('public'))
+
+ mongoose.connect('mongodb://127.0.0.1:27017/nodeblog_db');
+
+app.engine('handlebars', exphbs.engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'site/index.html'))
+    res.render('site2/index');
 })
+
+app.get('/about', (req, res) => {
+    res.render('site2/about');
+})
+
+app.get('/blog', (req, res) => {
+    res.render('site2/blog');
+})
+
+app.get('/contact', (req, res) => {
+    res.render('site2/contact');
+})
+
+app.get('/login', (req, res) => {
+    res.render('site2/login');
+})
+
+app.get('/register', (req, res) => {
+    res.render('site2/register');
+})
+
 app.listen(port, hostname, () => {
   console.log(`Server calisiyor, http://${hostname}:${port}/`)
 })
