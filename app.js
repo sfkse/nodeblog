@@ -1,12 +1,15 @@
 const exphbs = require('express-handlebars')
 const path = require('path')
 const express = require('express')
+const mongoose = require('mongoose');
 const app = express()
 const port = 3000
 const hostname = '127.0.0.1'
 
 
 app.use(express.static('public'))
+
+ mongoose.connect('mongodb://127.0.0.1:27017/nodeblog_db');
 
 app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
@@ -26,6 +29,14 @@ app.get('/blog', (req, res) => {
 
 app.get('/contact', (req, res) => {
     res.render('site2/contact');
+})
+
+app.get('/login', (req, res) => {
+    res.render('site2/login');
+})
+
+app.get('/register', (req, res) => {
+    res.render('site2/register');
 })
 
 app.listen(port, hostname, () => {
