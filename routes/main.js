@@ -21,13 +21,4 @@ router.get('/contact', (req, res) => {
     res.render('site2/contact');
 })
 
-router.get('/login', (req, res) => {
-    res.render('site2/login');
-})
-
-router.get('/register', (req, res) => {
-    res.render('site2/register');
-})
-
-
 module.exports = router;
