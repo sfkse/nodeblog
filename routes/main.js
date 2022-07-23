@@ -11,7 +11,7 @@ router.get('/about', (req, res) => {
 })
 
 router.get('/blog', (req, res) => {
-    Post.find({}).then(posts => {
+    Post.find({}).sort({$natural: -1}).then(posts => {
         console.log(posts);
         res.render('site2/blog', {posts: posts.map(post => post.toJSON())});
     })

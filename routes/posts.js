@@ -25,7 +25,6 @@ router.post('/test', (req, res) => {
         ...req.body,
         post_image: `img/postimages/${post_image.name}`
     });
-    console.log(req.files.post_image)
     res.redirect('/');
 })
 module.exports = router;

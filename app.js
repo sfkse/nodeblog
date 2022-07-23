@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const expressSession = require('express-session');
 const MongoStore = require('connect-mongo');
+const methodOverride = require('method-override')
 
 const generateDate = require('./helpers/generateDate').generateDate;
 const app = express();
@@ -22,6 +23,7 @@ app.use(
   }),
 );
 app.use(express.static('public'));
+app.use(methodOverride('_method'));
 
 app.use(fileUpload());
 
